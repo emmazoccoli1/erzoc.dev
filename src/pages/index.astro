@@ -1,0 +1,42 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Button from '@/components/Button.astro';
+import Card from '@/components/Card.astro';
+---
+<BaseLayout title="Home" description="Welcome to erzoc.dev — personal site and blog.">
+  <h1>Hey, I'm erzoc</h1>
+  <p>This is my personal site. I'll add more here as I go — projects, blog posts, and whatever feels right.</p>
+
+  <section class="home-actions">
+    <Button href="/blog/">Read the blog</Button>
+    <Button href="/about/" variant="secondary">About</Button>
+  </section>
+
+  <section class="home-cards">
+    <Card title="Blog" href="/blog/">
+      <p>Posts and updates. Add new content in <code>src/content/blog/</code>.</p>
+    </Card>
+    <Card title="About" href="/about/">
+      <p>Learn more about this site and how it's built (Astro, file routing, components).</p>
+    </Card>
+  </section>
+</BaseLayout>
+
+<style>
+  .home-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin: 1.5rem 0;
+  }
+  .home-cards {
+    display: grid;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  code {
+    font-size: 0.9em;
+    background: #eee;
+    padding: 0.15rem 0.35rem;
+    border-radius: 4px;
+  }
+</style>

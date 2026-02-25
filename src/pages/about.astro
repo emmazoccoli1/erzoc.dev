@@ -1,0 +1,33 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Button from '@/components/Button.astro';
+---
+<BaseLayout title="About" description="About erzoc.dev and how it's built.">
+  <h1>About</h1>
+  <p>This site uses <strong>Astro</strong> with file-based routing and reusable components.</p>
+
+  <h2>File routing</h2>
+  <p>Routes come from <code>src/pages/</code>:</p>
+  <ul>
+    <li><code>index.astro</code> → /</li>
+    <li><code>about.astro</code> → /about/</li>
+    <li><code>blog/index.astro</code> → /blog/</li>
+    <li><code>blog/[slug].astro</code> → /blog/:slug</li>
+  </ul>
+
+  <h2>Storage & data</h2>
+  <p>Site nav and footer text live in <code>src/data/site.json</code>. Blog content is in <code>src/content/blog/</code> (content collections).</p>
+
+  <p><Button href="/">Back home</Button></p>
+</BaseLayout>
+
+<style>
+  ul { margin: 0.5rem 0; padding-left: 1.5rem; }
+  code {
+    font-size: 0.9em;
+    background: #eee;
+    padding: 0.15rem 0.35rem;
+    border-radius: 4px;
+  }
+  h2 { margin-top: 1.5rem; }
+</style>

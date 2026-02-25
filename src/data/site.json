@@ -1,0 +1,13 @@
+{
+  "nav": {
+    "brand": "erzoc.dev",
+    "links": [
+      { "label": "Home", "href": "/" },
+      { "label": "Blog", "href": "/blog/" },
+      { "label": "About", "href": "/about/" }
+    ]
+  },
+  "footer": {
+    "copyright": "© 2025 erzoc.dev — built with Astro"
+  }
+}

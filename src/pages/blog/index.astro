@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+const posts = (await getCollection('blog'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+<BaseLayout title="Blog" description="Blog — erzoc.dev">
+  <h1>Blog</h1>
+  <ul>
+    {posts.map((post) => (
+      <li>
+        <a href={`/blog/${post.slug}/`}>{post.data.title}</a>
+        <time datetime={post.data.pubDate.toISOString()}>
+          {post.data.pubDate.toLocaleDateString()}
+        </time>
+      </li>
+    ))}
+  </ul>
+</BaseLayout>
+
+<style>
+  ul { list-style: none; padding: 0; }
+  li { margin-bottom: 0.75rem; }
+  li a { font-weight: 500; }
+  time { margin-left: 0.5rem; font-size: 0.9rem; color: #666; }
+</style>
