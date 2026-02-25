@@ -1,0 +1,40 @@
+---
+// ColorBends-style animated gradient — same colors as React Bits variant
+// Pure CSS, no React; works as full-viewport background
+---
+<div class="color-bends" aria-hidden="true">
+  <div class="color-bends__gradient" />
+</div>
+
+<style>
+  .color-bends {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .color-bends__gradient {
+    width: 150%;
+    height: 150%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(110deg);
+    animation: color-bends-spin 20s linear infinite;
+    background: conic-gradient(
+      from 0deg at 50% 50%,
+      #fe0b0b 0deg,
+      #da2bd4 90deg,
+      #00a0f0 180deg,
+      #ffea00 270deg,
+      #fe0b0b 360deg
+    );
+    filter: blur(80px);
+    opacity: 0.9;
+  }
+  @keyframes color-bends-spin {
+    to {
+      transform: translate(-50%, -50%) rotate(470deg);
+    }
+  }
+</style>

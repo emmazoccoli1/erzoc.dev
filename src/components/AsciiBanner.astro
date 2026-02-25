@@ -1,0 +1,52 @@
+---
+// 90s-style ASCII banner for hero / panels
+interface Props {
+  variant?: 'logo' | 'welcome' | 'panel';
+}
+const { variant = 'logo' } = Astro.props;
+---
+{variant === 'logo' && (
+  <pre class="ascii-banner ascii-banner--logo" aria-hidden="true"><code>  ___  ____  ______  ____ 
+ / _ \|  _ \|__  /  / ___|
+| | | | |_) | / /   \___ \ 
+| |_| |  _ &lt; / /_    ___) |
+ \___/|_| \_\____|  |____/</code></pre>
+)}
+{variant === 'welcome' && (
+  <pre class="ascii-banner ascii-banner--welcome" aria-hidden="true"><code> _       __     __
+| |     / /__  / /_
+| | /| / / _ \/ __/
+| |/ |/ /  __/ /_  
+|__/|__/\___/\__/</code></pre>
+)}
+{variant === 'panel' && (
+  <pre class="ascii-banner ascii-banner--panel" aria-hidden="true"><code>┌─────────────────────────┐
+│   ERZOC.DEV DASHBOARD   │
+└─────────────────────────┘</code></pre>
+)}
+
+<style>
+  .ascii-banner {
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: clamp(0.5rem, 2vw, 0.7rem);
+    line-height: 1.2;
+    margin: 0 auto 1rem;
+    color: #2a2a2a;
+    text-shadow: 1px 1px 0 rgba(255,255,255,0.8);
+    letter-spacing: 0.02em;
+  }
+  .ascii-banner code {
+    background: none;
+    padding: 0;
+  }
+  .ascii-banner--logo {
+    max-width: 18ch;
+  }
+  .ascii-banner--welcome {
+    font-size: clamp(0.45rem, 1.8vw, 0.65rem);
+  }
+  .ascii-banner--panel {
+    font-size: 0.6rem;
+    color: #444;
+  }
+</style>

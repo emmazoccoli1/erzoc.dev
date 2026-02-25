@@ -1,0 +1,48 @@
+---
+interface Props {
+  label: string;
+  href?: string;
+  value?: string;
+}
+const { label, href, value } = Astro.props;
+---
+<div class="retro-block">
+  <div class="retro-block__label">{label}</div>
+  <div class="retro-block__value">
+    {href ? (
+      <a href={href} class="retro-block__link">{value ?? 'OPEN'}</a>
+    ) : (
+      <span>{value ?? '—'}</span>
+    )}
+  </div>
+</div>
+
+<style>
+  .retro-block {
+    background: #1a1a1a;
+    border: 2px solid #333;
+    padding: 0;
+    overflow: hidden;
+  }
+  .retro-block__label {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #a0a0a0;
+    border-bottom: 1px solid #333;
+  }
+  .retro-block__value {
+    padding: 10px 12px;
+    font-size: 0.95rem;
+    color: #c0c0c0;
+  }
+  .retro-block__link {
+    color: #c0c0c0;
+    text-decoration: none;
+  }
+  .retro-block__link:hover {
+    color: #fff;
+    text-decoration: underline;
+  }
+</style>

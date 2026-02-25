@@ -4,8 +4,9 @@ import Footer from '@/components/Footer.astro';
 interface Props {
   title: string;
   description?: string;
+  bodyClass?: string;
 }
-const { title, description = 'Personal site and blog — erzoc.dev' } = Astro.props;
+const { title, description = 'Personal site and blog — erzoc.dev', bodyClass } = Astro.props;
 ---
 <!doctype html>
 <html lang="en">
@@ -13,10 +14,10 @@ const { title, description = 'Personal site and blog — erzoc.dev' } = Astro.pr
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>{title} | erzoc.dev</title>
   </head>
-  <body>
+  <body class={bodyClass}>
     <Header />
     <main>
       <slot />
@@ -35,5 +36,22 @@ const { title, description = 'Personal site and blog — erzoc.dev' } = Astro.pr
     padding: 1rem 1.5rem;
     color: #1a1a1a;
     background: #fafafa;
+  }
+  body.page-home {
+    background: transparent;
+  }
+  body.page-home main {
+    background: transparent;
+  }
+  body.page-retro {
+    font-family: 'Courier New', Consolas, monospace;
+    background: #8a8a8a;
+    color: #1a1a1a;
+    max-width: none;
+  }
+  body.page-retro main {
+    max-width: none;
+    padding: 1rem 1.5rem;
+    background: transparent;
   }
 </style>

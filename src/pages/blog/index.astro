@@ -1,27 +1,41 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
+import RetroScreen from '@/components/RetroScreen.astro';
+import RetroBlock from '@/components/RetroBlock.astro';
+import TypingIntro from '@/components/TypingIntro.astro';
+
 const posts = (await getCollection('blog'))
   .filter((p) => !p.data.draft)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
-<BaseLayout title="Blog" description="Blog — erzoc.dev">
-  <h1>Blog</h1>
-  <ul>
+<BaseLayout title="Blog" description="Blog & portfolio — erzoc.dev" bodyClass="page-retro">
+  <TypingIntro
+    messages={["Oh hey there.", "Hope you find what you're looking for."]}
+    typingSpeed={55}
+    pauseDuration={2200}
+    cursorChar="_"
+  />
+  <RetroScreen screenTitle="Portfolio & Blog">
+    <p class="retro-intro">Projects, posts, and links. Select an entry to open.</p>
     {posts.map((post) => (
-      <li>
-        <a href={`/blog/${post.id}/`}>{post.data.title}</a>
-        <time datetime={post.data.pubDate.toISOString()}>
-          {post.data.pubDate.toLocaleDateString()}
-        </time>
-      </li>
+      <RetroBlock
+        label={`ENTRY — ${post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}`}
+        href={`/blog/${post.id}/`}
+        value={post.data.title}
+      />
     ))}
-  </ul>
+    {posts.length === 0 && (
+      <RetroBlock label="NO ENTRIES" value="Add .md or .mdx files in src/content/blog/" />
+    )}
+  </RetroScreen>
 </BaseLayout>
 
 <style>
-  ul { list-style: none; padding: 0; }
-  li { margin-bottom: 0.75rem; }
-  li a { font-weight: 500; }
-  time { margin-left: 0.5rem; font-size: 0.9rem; color: #666; }
+  .retro-intro {
+    margin: 0 0 1rem;
+    font-size: 0.9rem;
+    color: #444;
+    text-align: center;
+  }
 </style>

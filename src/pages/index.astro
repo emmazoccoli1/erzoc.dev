@@ -2,40 +2,111 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Button from '@/components/Button.astro';
 import Card from '@/components/Card.astro';
+import ColorBendsBackground from '@/components/ColorBendsBackground.astro';
+import AsciiBanner from '@/components/AsciiBanner.astro';
 ---
-<BaseLayout title="Home" description="Welcome to erzoc.dev — personal site and blog.">
-  <h1>Hey, I'm erzoc</h1>
-  <p>This is my personal site. I'll add more here as I go — projects, blog posts, and whatever feels right.</p>
-
-  <section class="home-actions">
-    <Button href="/blog/">Read the blog</Button>
-    <Button href="/about/" variant="secondary">About</Button>
-  </section>
-
-  <section class="home-cards">
-    <Card title="Blog" href="/blog/">
-      <p>Posts and updates. Add new content in <code>src/content/blog/</code>.</p>
-    </Card>
-    <Card title="About" href="/about/">
-      <p>Learn more about this site and how it's built (Astro, file routing, components).</p>
-    </Card>
-  </section>
+<BaseLayout title="Home" description="Welcome to erzoc.dev — personal site and blog." bodyClass="page-home">
+  <ColorBendsBackground />
+  <div class="home">
+    <section class="hero panel-90s-hero">
+      <div class="panel-90s-hero__titlebar">Main Dashboard</div>
+      <div class="panel-90s-hero__inner">
+        <AsciiBanner variant="logo" />
+        <h1 class="hero__title">Hey, I'm erzoc</h1>
+        <p class="hero__tagline">Website for the fans, folk, and friends back home.</p>
+        <p class="hero__intro">Projects, blog posts, and whatever feels right.</p>
+        <div class="hero__actions">
+          <Button href="/blog/">Read the blog</Button>
+          <Button href="/about/" variant="secondary">About</Button>
+        </div>
+      </div>
+    </section>
+    <section class="home-cards">
+      <Card title="Blog" href="/blog/">
+        <p>Posts and updates. New stuff in <code>src/content/blog/</code>.</p>
+      </Card>
+      <Card title="About" href="/about/">
+        <p>How this site is built — Astro, routing, components.</p>
+      </Card>
+    </section>
+  </div>
 </BaseLayout>
 
 <style>
-  .home-actions {
+  .home {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding-top: 1rem;
+  }
+  .hero {
+    text-align: center;
+    padding: 0;
+  }
+  .panel-90s-hero {
+    background: #c0c0c0;
+    border: 2px solid #000;
+    box-shadow: 2px 2px 0 #dfdfdf, -1px -1px 0 #808080 inset;
+  }
+  .panel-90s-hero__titlebar {
+    background: #0a246a;
+    color: #fff;
+    padding: 6px 12px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #000;
+  }
+  .panel-90s-hero__inner {
+    padding: 2rem 1rem 3rem;
+    background: #fff;
+    margin: 2px;
+    border: 1px solid #808080;
+    border-top-color: #c0c0c0;
+    border-left-color: #c0c0c0;
+  }
+  .hero__title {
+    font-size: clamp(2rem, 6vw, 3rem);
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+    letter-spacing: -0.02em;
+    color: #1a1a1a;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+  }
+  .hero__tagline {
+    font-size: 1.15rem;
+    color: #2a2a2a;
+    margin: 0 0 0.5rem;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.6);
+  }
+  .hero__intro {
+    color: #444;
+    margin: 0 0 2rem;
+    max-width: 36ch;
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+  }
+  .hero__actions {
     display: flex;
     gap: 0.75rem;
-    margin: 1.5rem 0;
+    justify-content: center;
+    flex-wrap: wrap;
   }
   .home-cards {
     display: grid;
     gap: 1rem;
-    margin-top: 2rem;
+    margin-top: auto;
+    padding: 0;
+    background: transparent;
+    backdrop-filter: none;
+    border: none;
   }
-  code {
+  .home-cards code {
     font-size: 0.9em;
-    background: #eee;
+    background: rgba(0, 0, 0, 0.06);
     padding: 0.15rem 0.35rem;
     border-radius: 4px;
   }

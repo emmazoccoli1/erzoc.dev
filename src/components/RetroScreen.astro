@@ -1,0 +1,157 @@
+---
+interface Props {
+  screenTitle?: string;
+}
+const { screenTitle = 'BLOG' } = Astro.props;
+---
+<div class="retro-screen">
+  <div class="retro-screen__scanlines" aria-hidden="true" />
+  <div class="retro-screen__border retro-screen__border--left">
+    <div class="retro-screen__jag retro-screen__jag--left" aria-hidden="true" />
+    <div class="retro-screen__border-inner retro-screen__border-inner--yellow" />
+    <div class="retro-screen__border-inner retro-screen__border-inner--blue" />
+  </div>
+  <div class="retro-screen__border retro-screen__border--right">
+    <div class="retro-screen__jag retro-screen__jag--right" aria-hidden="true" />
+    <div class="retro-screen__border-inner retro-screen__border-inner--yellow" />
+    <div class="retro-screen__border-inner retro-screen__border-inner--blue" />
+  </div>
+  <div class="retro-screen__main">
+    <header class="retro-screen__header">
+      <div class="retro-screen__logo" aria-hidden="true">E</div>
+      <h1 class="retro-screen__title">{screenTitle}</h1>
+    </header>
+    <div class="retro-screen__content">
+      <slot />
+    </div>
+  </div>
+</div>
+
+<style>
+  .retro-screen {
+    position: relative;
+    min-height: 70vh;
+    background: #b0b0b0;
+    margin: 0 auto;
+    max-width: 900px;
+    box-shadow: inset 0 0 80px rgba(0,0,0,0.12);
+  }
+  .retro-screen__scanlines {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 10;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.04) 2px,
+      rgba(0,0,0,0.04) 4px
+    );
+  }
+  .retro-screen__border {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 32px;
+    z-index: 2;
+  }
+  .retro-screen__jag {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 8px;
+    background: #1a1a1a;
+    z-index: 3;
+  }
+  .retro-screen__jag--left {
+    left: 0;
+    mask-image: repeating-linear-gradient(
+      -45deg,
+      transparent 0,
+      transparent 4px,
+      black 4px,
+      black 8px
+    );
+    -webkit-mask-image: repeating-linear-gradient(
+      -45deg,
+      transparent 0,
+      transparent 4px,
+      black 4px,
+      black 8px
+    );
+  }
+  .retro-screen__jag--right {
+    right: 0;
+    left: auto;
+    mask-image: repeating-linear-gradient(45deg, transparent 0, transparent 4px, black 4px, black 8px);
+    -webkit-mask-image: repeating-linear-gradient(45deg, transparent 0, transparent 4px, black 4px, black 8px);
+  }
+  .retro-screen__border--left {
+    left: 0;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+  .retro-screen__border--right {
+    right: 0;
+    left: auto;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+  .retro-screen__border-inner {
+    position: absolute;
+    inset: 0;
+  }
+  .retro-screen__border-inner--yellow {
+    background: linear-gradient(90deg, #c9a227 0%, #b8921e 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 3px 3px, 3px calc(100% - 3px), calc(100% - 3px) calc(100% - 3px), calc(100% - 3px) 3px);
+  }
+  .retro-screen__border-inner--blue {
+    background: linear-gradient(180deg, #2a4a7a 0%, #1a3a6a 100%);
+    left: 6px;
+    right: -3px;
+    top: 2px;
+    bottom: 2px;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 2px 2px, 2px calc(100% - 2px), calc(100% - 2px) calc(100% - 2px), calc(100% - 2px) 2px);
+  }
+  .retro-screen__border--right .retro-screen__border-inner--blue {
+    left: -3px;
+    right: 6px;
+  }
+  .retro-screen__main {
+    position: relative;
+    z-index: 1;
+    padding: 2rem 2.5rem 3rem;
+    margin: 0 32px;
+  }
+  .retro-screen__header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .retro-screen__logo {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 0.5rem;
+    border-radius: 50%;
+    background: #8b1a1a;
+    color: #fff;
+    font-size: 1.75rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    border: 2px solid #5a0a0a;
+  }
+  .retro-screen__title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #1a1a1a;
+  }
+  .retro-screen__content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+</style>

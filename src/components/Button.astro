@@ -5,31 +5,67 @@ interface Props {
 }
 const { href, variant = 'primary' } = Astro.props;
 ---
-<a href={href} class:list={['btn', variant === 'primary' && 'btn--primary', variant === 'secondary' && 'btn--secondary']}>
-  <slot />
+<a href={href} class:list={['btn-90s', variant === 'primary' && 'btn-90s--primary', variant === 'secondary' && 'btn-90s--secondary']}>
+  <span class="btn-90s__arrow">&#9664;</span>
+  <span class="btn-90s__label"><slot /></span>
+  <span class="btn-90s__arrow">&#9654;</span>
 </a>
 
 <style>
-  .btn {
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
+  .btn-90s {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
     text-decoration: none;
-    font-weight: 500;
-    transition: background 0.2s, color 0.2s;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    /* 3D bevel: light top/left, dark bottom/right */
+    border: 2px solid transparent;
+    border-top-color: #fff;
+    border-left-color: #fff;
+    border-right-color: #404040;
+    border-bottom-color: #404040;
+    box-shadow: 1px 1px 0 #fff inset, -1px -1px 0 #808080 inset;
   }
-  .btn--primary {
-    background: #1a1a1a;
-    color: #fff;
+  .btn-90s--primary {
+    background: linear-gradient(180deg, #c0c0c0 0%, #a0a0a0 50%, #808080 100%);
+    color: #000;
   }
-  .btn--primary:hover {
-    background: #333;
+  .btn-90s--primary:hover {
+    background: linear-gradient(180deg, #d8d8d8 0%, #c0c0c0 50%, #a8a8a8 100%);
   }
-  .btn--secondary {
-    background: #e0e0e0;
-    color: #1a1a1a;
+  .btn-90s--primary:active {
+    box-shadow: 1px 1px 0 #808080 inset, -1px -1px 0 #fff inset;
+    border-top-color: #404040;
+    border-left-color: #404040;
+    border-right-color: #fff;
+    border-bottom-color: #fff;
   }
-  .btn--secondary:hover {
-    background: #d0d0d0;
+  .btn-90s--secondary {
+    background: linear-gradient(180deg, #ececec 0%, #d4d4d4 50%, #b8b8b8 100%);
+    color: #000;
+  }
+  .btn-90s--secondary:hover {
+    background: linear-gradient(180deg, #fff 0%, #e8e8e8 50%, #d0d0d0 100%);
+  }
+  .btn-90s--secondary:active {
+    box-shadow: 1px 1px 0 #808080 inset, -1px -1px 0 #fff inset;
+    border-top-color: #404040;
+    border-left-color: #404040;
+    border-right-color: #fff;
+    border-bottom-color: #fff;
+  }
+  .btn-90s__arrow {
+    font-size: 0.6rem;
+    color: #404040;
+    line-height: 1;
+  }
+  .btn-90s__label {
+    line-height: 1;
   }
 </style>
