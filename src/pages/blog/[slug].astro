@@ -4,7 +4,7 @@ import { getCollection } from 'astro:content';
 export async function getStaticPaths() {
   const posts = (await getCollection('blog'))
     .filter((p) => !p.data.draft)
-    .map((p) => ({ params: { slug: p.slug }, props: { post: p } }));
+    .map((p) => ({ params: { slug: p.id }, props: { post: p } }));
   return posts;
 }
 const { post } = Astro.props;
