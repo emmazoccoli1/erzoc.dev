@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 export async function getStaticPaths() {
   const posts = (await getCollection('blog'))
     .filter((p) => !p.data.draft)
@@ -8,7 +8,7 @@ export async function getStaticPaths() {
   return posts;
 }
 const { post } = Astro.props;
-const { Content } = await post.render();
+const { Content } = await render(post);
 ---
 <BaseLayout title={post.data.title} description={post.data.description}>
   <article>
